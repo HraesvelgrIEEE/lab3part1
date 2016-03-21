@@ -23,10 +23,10 @@
 #define INPUT 1
 #define OUTPUT 0
 
-#define PWM_TIMER3_PRVAL 2 //FIXME
+#define PWM_TIMER3_PRVAL 512 //FIXME
 
 void initPWM() {
-    initTimer3(PWM_TIMER3_PRVAL); //TODO: PR VAL
+    initTimer3(PWM_TIMER3_PRVAL);
     
     //TODO: CONTROL THE ENABLE PINS
     
@@ -64,7 +64,7 @@ void setPWM(int motorSelect, float dutyCycle, short direction, short idle = 0) {
             }
             else {
                 PWM_A_CON.ON = 1;
-                PWM_A_DIR_LAT = PWM_MOTOR_FORWARD;
+                PWM_A_DIR_LAT = direction;
                 if (direction == PWM_MOTOR_FORWARD)
                     PWM_A_RS = dutyCycle * PWM_TIMER3_PRVAL;
                 else
@@ -77,7 +77,7 @@ void setPWM(int motorSelect, float dutyCycle, short direction, short idle = 0) {
             }
             else {
                 PWM_B_CON.ON = 1;
-                PWM_B_DIR_LAT = PWM_MOTOR_FORWARD;
+                PWM_B_DIR_LAT = direction;
                 if (direction == PWM_MOTOR_FORWARD)
                     PWM_B_RS = dutyCycle * PWM_TIMER3_PRVAL;
                 else

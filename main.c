@@ -11,15 +11,11 @@
 #include "pwm.h"
 #include "adc.h"
 
-typedef enum stateTypeEnum {/*TODO: THIS*/} stateType; 
+typedef enum stateTypeEnum {wait, colorado, setPWMs} stateType; 
 
 volatile stateType state, nextState;
 
-/* TODO LIST:
- * All the noted TO-DOs
- * Displaying detected pot reading on LCD
- * Part 2 stuff
- */
+volatile int pot;
 
 int main(void) {
     //Initialize
@@ -31,9 +27,26 @@ int main(void) {
     initADC();
     initPWM();
    
-   while (1) {
+    int leftMotor, rightMotor;
+    char buffer[5];
+    
+    while (1) {
         switch (state) {
-            //TODO: This FSM
+            case wait:
+                
+                break;
+            case colorado:
+                itoa(pot, buffer, 10);
+                printStringLCD(buffer);
+                state = setPWMs;
+                break;
+            case setPWMs:
+                leftMotor = 1 - float(511 - pot) / 511.0;
+                rightMotor = 1 - float(pot - 511) / 511.0;
+                setPWM(PWM_MOTOR_A, leftMotor, PWM_MOTOR_FORWARD);
+                setPWM(PWM_MOTOR_B, rightMotor, PWM_MOTOR_FORWARD);
+                state = wait;
+                break;
         }
     }
 }
@@ -41,12 +54,8 @@ int main(void) {
 __ISR(_ADC_VECTOR, IPL7SRS) _ADCInterrupt() {
     IFS0bits.AD1IF = 0;
     
-    /* TODO: STUFF
-     * dutyCycle = float(ADC1BUF0) / 1023 or something
-     * ^something could be using clever PR values and (optionally) bit shifting this value to directly get the proportion
-     * 
-     * Do some FSM magic or something
-     */
+    pot = ADC1BUF0;
     
+    state = colorado;
 }
 
