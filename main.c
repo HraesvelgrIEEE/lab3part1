@@ -27,8 +27,23 @@ int main(void) {
     initADC();
     initPWM();
    
-    int leftMotor, rightMotor;
+    float leftMotor, rightMotor;
     char buffer[5];
+    
+    int min = 500, max = 500;
+    
+    int i = 0;
+    
+    //Calibrate pot
+    printStringLCD("Calibrate Pot");
+    for (i = 0; i != 50; ++i) {
+        if (pot < min) min = pot;
+        if (pot > max) max = pot;
+        delayMs(100);
+    }
+    
+    float average = (float) (max - min) / 2.0 + min;
+    //End calibrate
     
     while (1) {
         switch (state) {
@@ -36,15 +51,16 @@ int main(void) {
                 
                 break;
             case colorado:
-                itoa(pot, buffer, 10);
+                itoa(buffer, pot, 10);
+                clearLCD();
                 printStringLCD(buffer);
                 state = setPWMs;
                 break;
             case setPWMs:
-                leftMotor = 1 - float(511 - pot) / 511.0;
-                rightMotor = 1 - float(pot - 511) / 511.0;
-                setPWM(PWM_MOTOR_A, leftMotor, PWM_MOTOR_FORWARD);
-                setPWM(PWM_MOTOR_B, rightMotor, PWM_MOTOR_FORWARD);
+                leftMotor = 1 - 2 * (float) (average - pot) / average;
+                rightMotor = 1 - 2 * (float) (pot - average) / average;
+                setPWM(PWM_MOTOR_A, leftMotor, PWM_MOTOR_FORWARD, 0);
+                setPWM(PWM_MOTOR_B, rightMotor, PWM_MOTOR_FORWARD, 0);
                 state = wait;
                 break;
         }
@@ -56,6 +72,6 @@ __ISR(_ADC_VECTOR, IPL7SRS) _ADCInterrupt() {
     
     pot = ADC1BUF0;
     
-    state = colorado;
+    if (state == wait) state = colorado;
 }
 

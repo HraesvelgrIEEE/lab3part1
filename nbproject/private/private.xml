@@ -3,12 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Users/David.DH-Machine/Documents/Spring%202016/ECE%20372A/lab3/part1/pwm.c</file>
-            <file>file:/D:/Users/David.DH-Machine/Documents/Spring%202016/ECE%20372A/lab3/part1/adc.h</file>
-            <file>file:/D:/Users/David.DH-Machine/Documents/Spring%202016/ECE%20372A/lab3/part1/pwm.h</file>
-            <file>file:/D:/Users/David.DH-Machine/Documents/Spring%202016/ECE%20372A/lab3/part1/adc.c</file>
-            <file>file:/D:/Users/David.DH-Machine/Documents/Spring%202016/ECE%20372A/lab3/part1/main.c</file>
-            <file>file:/D:/Users/David.DH-Machine/Documents/Spring%202016/ECE%20372A/lab3/part1/timer.c</file>
+            <file>file:/C:/Users/IEEE%20Guest/Documents/Cinthya/372_lab3_part1/lab3part1/timer.h</file>
+            <file>file:/C:/Users/IEEE%20Guest/Documents/Cinthya/372_lab3_part1/lab3part1/lcd.h</file>
+            <file>file:/C:/Users/IEEE%20Guest/Documents/Cinthya/372_lab3_part1/lab3part1/pwm.h</file>
+            <file>file:/C:/Users/IEEE%20Guest/Documents/Cinthya/372_lab3_part1/lab3part1/pwm.c</file>
+            <file>file:/C:/Users/IEEE%20Guest/Documents/Cinthya/372_lab3_part1/lab3part1/main.c</file>
         </group>
     </open-files>
 </project-private>

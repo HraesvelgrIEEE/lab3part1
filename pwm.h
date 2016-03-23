@@ -12,6 +12,6 @@
 #define PWM_MOTOR_BACKWARD 1
 
 void initPWM();
-void setPWM(int motorSelect, float dutyCycle, short direction, short idle = 0);
+void setPWM(int motorSelect, float dutyCycle, short direction, short idle);
 
 #endif	/* PWM_H */

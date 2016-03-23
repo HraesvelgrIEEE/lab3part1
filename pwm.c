@@ -55,8 +55,11 @@ void initPWM() {
     PWM_B_CON.ON = 1; //Enable OC4
 }
 
-void setPWM(int motorSelect, float dutyCycle, short direction, short idle = 0) {
+void setPWM(int motorSelect, float dutyCycle, short direction, short idle) {
     //idle is an override flag, disables OC because Garrett is finicky
+    
+    if (dutyCycle < 0) dutyCycle = 0;
+    
     switch (motorSelect) {
         case PWM_MOTOR_A:
             if (idle == 1) {

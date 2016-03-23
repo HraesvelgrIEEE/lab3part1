@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=part1
+PROJECTNAME=lab3part1
 
 # Active Configuration
 DEFAULTCONF=default
