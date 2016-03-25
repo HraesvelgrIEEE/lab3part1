@@ -28,7 +28,7 @@ int main(void) {
     initPWM();
    
     float leftMotor, rightMotor;
-    char buffer[5];
+    char buffer[16];
     
     int min = 500, max = 500;
     
@@ -51,7 +51,7 @@ int main(void) {
                 
                 break;
             case colorado:
-                itoa(buffer, pot, 10);
+                sprintf(buffer, "Voltage: %.3fV", pot / 1023.0 * 3.3);
                 clearLCD();
                 printStringLCD(buffer);
                 state = setPWMs;
